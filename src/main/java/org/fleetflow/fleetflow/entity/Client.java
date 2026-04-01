@@ -28,7 +28,7 @@ public class Client {
     public Client() {
     }
 
-    @OneToMany
-    @JsonIgnore
-    private List<Livraison> livraison;
+//    @OneToMany
+//    @JsonIgnore
+//    private List<Livraison> livraison;
 }

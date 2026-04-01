@@ -1,4 +1,20 @@
 package org.fleetflow.fleetflow.mapper;
 
-public class ClientMapper {
+import org.fleetflow.fleetflow.dto.ClientDTO.ClientRequestDTO;
+import org.fleetflow.fleetflow.dto.ClientDTO.ClientResponseDTO;
+import org.mapstruct.Mapper;
+import org.fleetflow.fleetflow.entity.Client;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+
+
+@Mapper(componentModel = "spring")
+public interface ClientMapper {
+
+    Client toEntity(ClientRequestDTO dto);
+
+    ClientResponseDTO toResponseDTO(Client client);
+
+    @Mapping(target = "clientId", ignore = true)
+    void updateClientFromDto(ClientRequestDTO dto, @MappingTarget Client entity);
 }

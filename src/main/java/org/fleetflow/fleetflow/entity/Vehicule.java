@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.fleetflow.fleetflow.enums.StatutVehicule;
 
 @Entity
 @Table(name = "vehicule")
@@ -16,9 +17,10 @@ public class Vehicule {
     private String matricule;
     private String type;
     private double capacite;
-    private String statut;
+    @Enumerated(EnumType.STRING)
+    private StatutVehicule statut;
 
-    public Vehicule(String matricule, String type, double capacite, String statut) {
+    public Vehicule(String matricule, String type, double capacite, StatutVehicule statut) {
         this.matricule = matricule;
         this.type = type;
         this.capacite = capacite;
@@ -28,7 +30,9 @@ public class Vehicule {
     public Vehicule() {
     }
 
-    @OneToMany
-    @JsonIgnore
-    private List<Livraison> livraison;
+//    @OneToMany(mappedBy = "vehicule")
+//    @JsonIgnore
+//    private List<Livraison> livraison;
+
+
 }

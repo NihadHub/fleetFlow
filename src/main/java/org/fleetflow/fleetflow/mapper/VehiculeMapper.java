@@ -1,9 +1,7 @@
 package org.fleetflow.fleetflow.mapper;
 
-import org.fleetflow.fleetflow.dto.ClientDTO.ClientRequestDTO;
-import org.fleetflow.fleetflow.dto.VehiculeDTO.VehiculeRequestDTO;
-import org.fleetflow.fleetflow.dto.VehiculeDTO.VehiculeResponseDTO;
-import org.fleetflow.fleetflow.entity.Client;
+import org.fleetflow.fleetflow.dto.vehiculeDTO.VehiculeRequestDTO;
+import org.fleetflow.fleetflow.dto.vehiculeDTO.VehiculeResponseDTO;
 import org.mapstruct.Mapper;
 import org.fleetflow.fleetflow.entity.Vehicule;
 import org.mapstruct.Mapping;

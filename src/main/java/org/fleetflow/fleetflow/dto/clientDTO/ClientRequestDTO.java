@@ -1,4 +1,4 @@
-package org.fleetflow.fleetflow.dto.ClientDTO;
+package org.fleetflow.fleetflow.dto.clientDTO;
 import lombok.Data;
 
 @Data

@@ -1,12 +1,9 @@
 package org.fleetflow.fleetflow.controller;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import org.fleetflow.fleetflow.dto.ClientDTO.ClientRequestDTO;
-import org.fleetflow.fleetflow.dto.VehiculeDTO.VehiculeRequestDTO;
-import org.fleetflow.fleetflow.dto.VehiculeDTO.VehiculeResponseDTO;
-import org.fleetflow.fleetflow.entity.Vehicule;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.fleetflow.fleetflow.dto.vehiculeDTO.VehiculeRequestDTO;
+import org.fleetflow.fleetflow.dto.vehiculeDTO.VehiculeResponseDTO;
 import org.fleetflow.fleetflow.enums.StatutVehicule;
-import org.fleetflow.fleetflow.mapper.VehiculeMapper;
 import org.fleetflow.fleetflow.service.VehiculeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/vehicule")
+@RequestMapping("/api/vehicules")
 public class VehiculeController {
     private VehiculeService vehiculeService;
 
@@ -47,13 +44,13 @@ public class VehiculeController {
     }
 
     @GetMapping("/statut/{statut}")
-    public ResponseEntity<List<VehiculeResponseDTO>> getVehiculeByStatut(@RequestParam StatutVehicule statut){
+    public ResponseEntity<List<VehiculeResponseDTO>> getVehiculeByStatut(@PathVariable StatutVehicule statut){
         return ResponseEntity.ok(vehiculeService.getVehiculeByStatut(statut));
     }
 
 
-    @GetMapping("/statut/{statut}")
-    public ResponseEntity<List<VehiculeResponseDTO>> getVehiculeByCapaciteGreaterThan(@RequestParam double capacite){
+    @GetMapping("/capacite/{capacite}")
+    public ResponseEntity<List<VehiculeResponseDTO>> getVehiculeByCapaciteGreaterThan(@PathVariable double capacite){
         return ResponseEntity.ok(vehiculeService.getVehiculeByCapaciteGreaterThan(capacite));
     }
 }

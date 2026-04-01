@@ -1,7 +1,7 @@
 package org.fleetflow.fleetflow.service;
 
-import org.fleetflow.fleetflow.dto.VehiculeDTO.VehiculeRequestDTO;
-import org.fleetflow.fleetflow.dto.VehiculeDTO.VehiculeResponseDTO;
+import org.fleetflow.fleetflow.dto.vehiculeDTO.VehiculeRequestDTO;
+import org.fleetflow.fleetflow.dto.vehiculeDTO.VehiculeResponseDTO;
 import org.fleetflow.fleetflow.entity.Vehicule;
 import org.fleetflow.fleetflow.enums.StatutVehicule;
 import org.fleetflow.fleetflow.mapper.VehiculeMapper;

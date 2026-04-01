@@ -15,6 +15,7 @@ public class Vehicule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long vehiculeId;
     private String matricule;
+    @Enumerated(EnumType.STRING)
     private String type;
     private double capacite;
     @Enumerated(EnumType.STRING)
@@ -30,9 +31,9 @@ public class Vehicule {
     public Vehicule() {
     }
 
-//    @OneToMany(mappedBy = "vehicule")
-//    @JsonIgnore
-//    private List<Livraison> livraison;
+    @OneToMany(mappedBy = "vehicule")
+    @JsonIgnore
+    private List<Livraison> livraison;
 
 
 }

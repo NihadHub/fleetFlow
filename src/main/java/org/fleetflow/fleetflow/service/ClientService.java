@@ -1,8 +1,8 @@
 package org.fleetflow.fleetflow.service;
 
 import org.fleetflow.fleetflow.mapper.ClientMapper;
-import org.fleetflow.fleetflow.dto.ClientDTO.ClientRequestDTO;
-import org.fleetflow.fleetflow.dto.ClientDTO.ClientResponseDTO;
+import org.fleetflow.fleetflow.dto.clientDTO.ClientRequestDTO;
+import org.fleetflow.fleetflow.dto.clientDTO.ClientResponseDTO;
 import org.fleetflow.fleetflow.entity.Client;
 import org.fleetflow.fleetflow.repository.ClientRepository;
 import org.springframework.stereotype.Service;

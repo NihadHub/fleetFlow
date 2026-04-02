@@ -8,13 +8,13 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "client")
+@Table(name = "clients")
 @Getter
 @Setter
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long clientId;
+    private Long id;
     private String nom;
     private String telephone;
     private String ville;

@@ -13,6 +13,6 @@ public interface LivraisonRepository extends JpaRepository<Livraison,Long> {
     List<Livraison> findLivraisonByClientId(Long id);
     @Query ("select l from Livraison l where l.dateLivraison between :dateDebut and :dateFin")
     List<Livraison> findLivraisonsEntreDeuxDates(@Param("dateDebut") LocalDate dateDebut,@Param("dateFin") LocalDate dateFin);
-    @Query("select l from Livraison l where L.adresseDestination like %:ville%")
+    @Query("select l from Livraison l where l.adresseDestination like %:ville%")
     List<Livraison> findLivraisonsParVilleDestination( @Param("ville") String ville);
 }

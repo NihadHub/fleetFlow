@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 public interface LivraisonRepository extends JpaRepository<Livraison,Long> {
     List<Livraison> findLivraisonByStatut(StatutLivraison statut);
-    List<Livraison> findLivraisonByClientId(Long id);
+    List<Livraison> findLivraisonByClient_ClientId(Long clientId);
     @Query ("select l from Livraison l where l.dateLivraison between :dateDebut and :dateFin")
     List<Livraison> findLivraisonsEntreDeuxDates(@Param("dateDebut") LocalDate dateDebut,@Param("dateFin") LocalDate dateFin);
     @Query("select l from Livraison l where l.adresseDestination like %:ville%")

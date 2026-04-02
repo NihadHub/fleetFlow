@@ -5,6 +5,7 @@ import org.fleetflow.fleetflow.enums.TypeVehicule;
 
 @Data
 public class VehiculeRequestDTO {
+    private Long vehiculeId;
     private String matricule;
     private TypeVehicule type;
     private double capacite;

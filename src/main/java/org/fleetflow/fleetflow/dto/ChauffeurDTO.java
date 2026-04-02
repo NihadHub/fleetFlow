@@ -6,7 +6,7 @@ import lombok.*;
 @AllArgsConstructor @NoArgsConstructor
 @Builder
 public class ChauffeurDTO {
-    private long id;
+    private Long chauffeurId;
 
     @NotBlank(message = "le nom est obligatoire")
     private String nom;

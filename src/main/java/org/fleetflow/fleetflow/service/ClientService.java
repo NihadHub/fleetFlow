@@ -24,16 +24,16 @@ public class ClientService {
         return clientMapper.toResponseDTO(client);
     }
 
-    public ClientResponseDTO updateClient(Long id , ClientRequestDTO clientDTO){
-        Client existsClient = clientRepository.findById(id)
+    public ClientResponseDTO updateClient(Long clientId , ClientRequestDTO clientDTO){
+        Client existsClient = clientRepository.findById(clientId)
                 .orElseThrow(()-> new RuntimeException("Client introuvable."));
         clientMapper.updateClientFromDto(clientDTO , existsClient);
         Client updateClient = clientRepository.save(existsClient);
         return clientMapper.toResponseDTO(updateClient);
     }
 
-    public void deleteClient(Long id){
-        clientRepository.deleteById(id);
+    public void deleteClient(Long clientId){
+        clientRepository.deleteById(clientId);
     }
 
     public List<ClientResponseDTO> getAllClient(){

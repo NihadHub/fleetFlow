@@ -14,7 +14,8 @@ import java.util.List;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    private Long clientId;
     private String nom;
     private String telephone;
     private String ville;

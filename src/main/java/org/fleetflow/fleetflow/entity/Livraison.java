@@ -14,7 +14,8 @@ public class Livraison {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    private Long livraisonId;
 
     @Column(nullable = false)
     private LocalDate dateLivraison;

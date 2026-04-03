@@ -7,6 +7,7 @@ import java.time.LocalDate;
 @NoArgsConstructor @AllArgsConstructor
 @Builder
 public class LivraisonDTO {
+    private Long livraisonId;
     @NotNull(message = "La date de livraison est obligatoire")
     private LocalDate dateLivraison;
 

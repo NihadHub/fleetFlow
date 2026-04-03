@@ -18,7 +18,8 @@ import java.util.List;
 public class Vehicule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    private Long vehiculeId;
     private String matricule;
 
     @Enumerated(EnumType.STRING)

@@ -12,7 +12,8 @@ public class Chauffeur {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    private Long chauffeurId;
 
     @Column(nullable = false)
     private String nom;

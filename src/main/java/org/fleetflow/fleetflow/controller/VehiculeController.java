@@ -27,14 +27,14 @@ public class VehiculeController {
         return new ResponseEntity<>(vehicule ,HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<VehiculeResponseDTO> updateVehicule(@PathVariable Long id , @RequestBody VehiculeRequestDTO vehiculeDTO){
-        return ResponseEntity.ok(vehiculeService.updateVehicule(id , vehiculeDTO));
+    @PutMapping("/{vehiculeId}")
+    public ResponseEntity<VehiculeResponseDTO> updateVehicule(@PathVariable Long vehiculeId , @RequestBody VehiculeRequestDTO vehiculeDTO){
+        return ResponseEntity.ok(vehiculeService.updateVehicule(vehiculeId ,vehiculeDTO));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteVehicule(@PathVariable Long id){
-        vehiculeService.deleteVehicule(id);
+    @DeleteMapping("/{vehiculeId}")
+    public ResponseEntity<Void> deleteVehicule(@PathVariable Long vehiculeId){
+        vehiculeService.deleteVehicule(vehiculeId);
         return ResponseEntity.noContent().build();
     }
 

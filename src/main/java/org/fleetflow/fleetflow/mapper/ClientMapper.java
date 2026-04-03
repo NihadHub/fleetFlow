@@ -15,6 +15,6 @@ public interface ClientMapper {
 
     ClientResponseDTO toResponseDTO(Client client);
 
-    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "clientId", ignore = true)
     void updateClientFromDto(ClientRequestDTO dto, @MappingTarget Client entity);
 }

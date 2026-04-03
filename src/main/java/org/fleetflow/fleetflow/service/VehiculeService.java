@@ -25,16 +25,16 @@ public class VehiculeService {
         return vehiculeMapper.toDTO(vehicule);
     }
 
-    public VehiculeResponseDTO updateVehicule(Long id , VehiculeRequestDTO vehiculeDTO){
-        Vehicule existsVehicule = vehiculeRepository.findById(id)
+    public VehiculeResponseDTO updateVehicule(Long vehiculeId , VehiculeRequestDTO vehiculeDTO){
+        Vehicule existsVehicule = vehiculeRepository.findById(vehiculeId)
                 .orElseThrow(()-> new RuntimeException("Vehicule introuvable."));
         vehiculeMapper.updateVehiculeFromDto(vehiculeDTO , existsVehicule);
         Vehicule updateVehicule = vehiculeRepository.save(existsVehicule);
         return vehiculeMapper.toDTO(updateVehicule);
     }
 
-    public void deleteVehicule(Long id){
-        vehiculeRepository.deleteById(id);
+    public void deleteVehicule(Long vehiculeId){
+        vehiculeRepository.deleteById(vehiculeId);
     }
 
     public List<VehiculeResponseDTO> getAllVehicule(){

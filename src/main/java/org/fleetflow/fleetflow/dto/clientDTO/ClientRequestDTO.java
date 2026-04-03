@@ -6,5 +6,4 @@ public class ClientRequestDTO {
     private String nom;
     private String telephone;
     private String ville;
-    private String statut;
 }

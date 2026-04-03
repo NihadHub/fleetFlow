@@ -7,5 +7,4 @@ public class ClientResponseDTO {
     private String nom;
     private String telephone;
     private String ville;
-    private String statut;
 }

@@ -129,7 +129,7 @@ public class LivraisonService {
 
     @Transactional(readOnly = true)
     public List<LivraisonDTO> listerParClient(Long clientId) {
-        return livraisonMapper.toDTOList(livraisonRepository.findByClientId(clientId));
+        return livraisonMapper.toDTOList(livraisonRepository.findByClientClientId(clientId));
     }
 
     @Transactional(readOnly = true)

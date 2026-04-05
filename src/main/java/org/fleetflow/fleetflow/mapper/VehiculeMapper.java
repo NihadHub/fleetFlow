@@ -10,10 +10,13 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring")
 public interface VehiculeMapper {
 
+    @Mapping(target = "vehiculeId", ignore = true)
+    @Mapping(target = "livraison", ignore = true)
     Vehicule toEntity(VehiculeRequestDTO dto);
 
     VehiculeResponseDTO toDTO(Vehicule vehicule);
 
     @Mapping(target = "vehiculeId", ignore = true)
+    @Mapping(target = "livraison", ignore = true)
     void updateVehiculeFromDto(VehiculeRequestDTO dto, @MappingTarget Vehicule entity);
 }

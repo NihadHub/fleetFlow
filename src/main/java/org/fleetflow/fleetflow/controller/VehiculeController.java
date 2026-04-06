@@ -1,5 +1,6 @@
 package org.fleetflow.fleetflow.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.fleetflow.fleetflow.dto.vehiculeDTO.VehiculeRequestDTO;
 import org.fleetflow.fleetflow.dto.vehiculeDTO.VehiculeResponseDTO;
@@ -22,13 +23,13 @@ public class VehiculeController {
     }
 
     @PostMapping
-    public ResponseEntity<VehiculeResponseDTO> addVehicule(@RequestBody VehiculeRequestDTO vehiculeDTO){
+    public ResponseEntity<VehiculeResponseDTO> addVehicule(@Valid @RequestBody VehiculeRequestDTO vehiculeDTO){
         VehiculeResponseDTO vehicule = vehiculeService.addVehicule(vehiculeDTO);
         return new ResponseEntity<>(vehicule ,HttpStatus.CREATED);
     }
 
     @PutMapping("/{vehiculeId}")
-    public ResponseEntity<VehiculeResponseDTO> updateVehicule(@PathVariable Long vehiculeId , @RequestBody VehiculeRequestDTO vehiculeDTO){
+    public ResponseEntity<VehiculeResponseDTO> updateVehicule(@PathVariable Long vehiculeId , @Valid @RequestBody VehiculeRequestDTO vehiculeDTO){
         return ResponseEntity.ok(vehiculeService.updateVehicule(vehiculeId ,vehiculeDTO));
     }
 

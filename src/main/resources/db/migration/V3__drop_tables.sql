@@ -1,0 +1,4 @@
+DROP TABLE IF EXISTS livraisons;
+DROP TABLE IF EXISTS client;
+DROP TABLE IF EXISTS chauffeurs;
+DROP TABLE IF EXISTS vehicule;

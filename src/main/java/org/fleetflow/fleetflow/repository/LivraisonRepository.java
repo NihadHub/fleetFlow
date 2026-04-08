@@ -1,6 +1,7 @@
 package org.fleetflow.fleetflow.repository;
 import org.fleetflow.fleetflow.entity.Livraison;
 import org.fleetflow.fleetflow.enums.StatutLivraison;
+import org.fleetflow.fleetflow.enums.StatutVehicule;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,4 +16,6 @@ public interface LivraisonRepository extends JpaRepository<Livraison,Long> {
     List<Livraison> findLivraisonsEntreDeuxDates(@Param("dateDebut") LocalDate dateDebut,@Param("dateFin") LocalDate dateFin);
     @Query("select l from Livraison l where l.adresseDestination like %:ville%")
     List<Livraison> findLivraisonsParVilleDestination( @Param("ville") String ville);
+
+    long countByVehicule_VehiculeId(StatutVehicule statut);
 }

@@ -8,24 +8,23 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "clients")
+@Table(name = "client")
 @Getter
 @Setter
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long clientId;
     private String nom;
     private String telephone;
     private String ville;
-    private String statut;
+    private String email;
 
-    public Client(String nom, String telephone, String ville, String statut) {
+    public Client(String nom, String telephone, String ville, String email) {
         this.nom = nom;
         this.telephone = telephone;
         this.ville = ville;
-        this.statut = statut;
+        this.email = email;
     }
 
     public Client() {

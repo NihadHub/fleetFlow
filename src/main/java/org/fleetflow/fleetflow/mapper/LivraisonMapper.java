@@ -17,8 +17,6 @@ public interface LivraisonMapper {
     LivraisonDTO toDTO(Livraison livraison);
 
     @Mapping(source = "clientId", target = "client.clientId")
-    @Mapping(target = "chauffeur", ignore = true)
-    @Mapping(target = "vehicule", ignore = true)
     Livraison toEntity(LivraisonDTO dto);
 
     List<LivraisonDTO> toDTOList(List<Livraison> livraisons);

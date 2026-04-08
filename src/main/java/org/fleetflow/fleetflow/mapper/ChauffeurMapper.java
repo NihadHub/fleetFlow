@@ -12,3 +12,4 @@ public interface ChauffeurMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntityFromDTO(ChauffeurDTO dto, @MappingTarget Chauffeur chauffeur);
 }
+

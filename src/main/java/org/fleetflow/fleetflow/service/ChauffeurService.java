@@ -39,7 +39,6 @@ public class ChauffeurService {
     public List<ChauffeurDTO> listerTous() {
         return chauffeurMapper.toDTOList(chauffeurRepository.findAll());
     }
-
     @Transactional(readOnly = true)
     public List<ChauffeurDTO> listerDisponibles() {
         return chauffeurMapper.toDTOList(chauffeurRepository.findByDisponibleTrue());

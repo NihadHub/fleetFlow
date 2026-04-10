@@ -11,3 +11,4 @@ public interface VehiculeRepository extends JpaRepository<Vehicule , Long> {
     List<Vehicule> findVehiculeByCapaciteGreaterThan(double capacite);
 
 }
+

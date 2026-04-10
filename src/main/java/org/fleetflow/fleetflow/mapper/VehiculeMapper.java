@@ -20,3 +20,4 @@ public interface VehiculeMapper {
     @Mapping(target = "livraison", ignore = true)
     void updateVehiculeFromDto(VehiculeRequestDTO dto, @MappingTarget Vehicule entity);
 }
+

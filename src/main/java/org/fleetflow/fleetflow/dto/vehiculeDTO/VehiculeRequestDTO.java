@@ -18,4 +18,5 @@ public class VehiculeRequestDTO {
     private double capacite;
 
     private StatutVehicule statut;
+
 }

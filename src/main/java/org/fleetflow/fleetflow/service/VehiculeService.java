@@ -9,10 +9,12 @@ import org.fleetflow.fleetflow.repository.LivraisonRepository;
 import org.fleetflow.fleetflow.repository.VehiculeRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class VehiculeService {
+    private final LivraisonRepository livraisonRepository;
     private VehiculeRepository vehiculeRepository;
     private VehiculeMapper vehiculeMapper;
     private LivraisonRepository livraisonRepository;
@@ -46,15 +48,13 @@ public class VehiculeService {
                 .map(vehiculeMapper::toDTO).toList();
     }
 
-    public List<VehiculeResponseDTO> getVehiculeByStatut(StatutVehicule statut){
-
+    public List<VehiculeResponseDTO> getVehiculeByStatut(StatutVehicule statut) {
         return vehiculeRepository.findVehiculeByStatut(statut).stream().map(v -> {
-        long countVehicule = livraisonRepository.countByVehicule_VehiculeId(statut);
-                VehiculeResponseDTO dto = vehiculeMapper.toDTO(v);
-                dto.setCountVehicule(countVehicule);
-                return dto;
-                }).toList();
-
+            long countVehicule = livraisonRepository.countByVehicule_VehiculeId(statut);
+            VehiculeResponseDTO dto = vehiculeMapper.toDTO(v);
+            dto.setCountVehicule(countVehicule);
+            return dto;
+        }).toList();
     }
 
     public List<VehiculeResponseDTO> getVehiculeByCapaciteGreaterThan(double capacite){

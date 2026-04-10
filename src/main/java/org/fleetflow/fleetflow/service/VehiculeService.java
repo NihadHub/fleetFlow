@@ -17,7 +17,9 @@ public class VehiculeService {
     private final LivraisonRepository livraisonRepository;
     private VehiculeRepository vehiculeRepository;
     private VehiculeMapper vehiculeMapper;
-    public VehiculeService(VehiculeRepository vehiculeRepository , VehiculeMapper vehiculeMapper, LivraisonRepository livraisonRepository){
+    private LivraisonRepository livraisonRepository;
+
+    public VehiculeService(VehiculeRepository vehiculeRepository , VehiculeMapper vehiculeMapper , LivraisonRepository livraisonRepository){
         this.vehiculeRepository = vehiculeRepository;
         this.vehiculeMapper = vehiculeMapper;
         this.livraisonRepository = livraisonRepository;

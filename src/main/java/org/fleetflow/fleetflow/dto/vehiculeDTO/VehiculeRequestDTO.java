@@ -10,11 +10,13 @@ import org.fleetflow.fleetflow.enums.TypeVehicule;
 public class VehiculeRequestDTO {
     @NotBlank(message = "Le matricule est obligatoire")
     private String matricule;
-    @NotNull(message = "Le type est obligatoire")
+
+    @NotNull(message = "Le type de véhicule est obligatoire")
     private TypeVehicule type;
+
     @Positive(message = "La capacité doit être positive")
     private double capacite;
-    @NotNull(message = "Le statut est obligatoire")
+
     private StatutVehicule statut;
 
 }

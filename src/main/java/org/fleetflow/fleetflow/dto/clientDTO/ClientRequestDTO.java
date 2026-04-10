@@ -7,11 +7,14 @@ import lombok.Data;
 public class ClientRequestDTO {
     @NotBlank(message = "Le nom est obligatoire")
     private String nom;
+
     @NotBlank(message = "Le téléphone est obligatoire")
     private String telephone;
+
     @NotBlank(message = "La ville est obligatoire")
     private String ville;
+
     @NotBlank(message = "L'email est obligatoire")
-    @Email(message = "Format d'email invalide")
+    @Email(message = "L'email doit être valide")
     private String email;
 }

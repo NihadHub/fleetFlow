@@ -1,5 +1,6 @@
 package org.fleetflow.fleetflow.controller;
 
+import jakarta.validation.Valid;
 import org.fleetflow.fleetflow.dto.clientDTO.ClientRequestDTO;
 import org.fleetflow.fleetflow.dto.clientDTO.ClientResponseDTO;
 import org.fleetflow.fleetflow.service.ClientService;

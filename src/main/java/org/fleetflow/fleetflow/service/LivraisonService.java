@@ -42,6 +42,30 @@ public class LivraisonService {
                 .client(client)
                 .build();
 
+        if (dto.getChauffeurId() != null) {
+            Chauffeur chauffeur = chauffeurRepository.findById(dto.getChauffeurId())
+                    .orElseThrow(() -> new RuntimeException("Chauffeur non trouvé"));
+            if (chauffeur.getDisponible()) {
+                livraison.setChauffeur(chauffeur);
+                chauffeur.setDisponible(false);
+                chauffeurRepository.save(chauffeur);
+            }
+        }
+
+        if (dto.getVehiculeId() != null) {
+            Vehicule vehicule = vehiculeRepository.findById(dto.getVehiculeId())
+                    .orElseThrow(() -> new RuntimeException("Véhicule non trouvé"));
+            if (vehicule.getStatut() == StatutVehicule.DISPONIBLE) {
+                livraison.setVehicule(vehicule);
+                vehicule.setStatut(StatutVehicule.EN_LIVRAISON);
+                vehiculeRepository.save(vehicule);
+            }
+        }
+
+        if (livraison.getChauffeur() != null && livraison.getVehicule() != null) {
+            livraison.setStatut(StatutLivraison.EN_COURS);
+        }
+
         Livraison saved = livraisonRepository.save(livraison);
         return livraisonMapper.toDTO(saved);
     }

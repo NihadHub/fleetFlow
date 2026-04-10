@@ -1,5 +1,6 @@
 package org.fleetflow.fleetflow.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.fleetflow.fleetflow.dto.vehiculeDTO.VehiculeRequestDTO;
 import org.fleetflow.fleetflow.dto.vehiculeDTO.VehiculeResponseDTO;

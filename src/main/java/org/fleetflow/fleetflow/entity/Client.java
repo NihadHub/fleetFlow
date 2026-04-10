@@ -18,11 +18,13 @@ public class Client {
     private String nom;
     private String telephone;
     private String ville;
+    private String email;
 
-    public Client(String nom, String telephone, String ville) {
+    public Client(String nom, String telephone, String ville, String email) {
         this.nom = nom;
         this.telephone = telephone;
         this.ville = ville;
+        this.email = email;
     }
 
     public Client() {

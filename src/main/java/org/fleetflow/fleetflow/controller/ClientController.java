@@ -3,6 +3,7 @@ package org.fleetflow.fleetflow.controller;
 import org.fleetflow.fleetflow.dto.clientDTO.ClientRequestDTO;
 import org.fleetflow.fleetflow.dto.clientDTO.ClientResponseDTO;
 import org.fleetflow.fleetflow.service.ClientService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,13 +20,13 @@ public class ClientController {
     }
 
     @PostMapping
-    public ResponseEntity<ClientResponseDTO> addClient(@RequestBody ClientRequestDTO clientDTO){
+    public ResponseEntity<ClientResponseDTO> addClient(@Valid @RequestBody ClientRequestDTO clientDTO){
         ClientResponseDTO client = clientService.addClient(clientDTO);
         return new ResponseEntity<>(client , HttpStatus.CREATED);
     }
 
     @PutMapping("/{clientId}")
-    public ResponseEntity<ClientResponseDTO> updateClient(@PathVariable Long clientId , @RequestBody ClientRequestDTO clientDTO){
+    public ResponseEntity<ClientResponseDTO> updateClient(@PathVariable Long clientId , @Valid @RequestBody ClientRequestDTO clientDTO){
         return ResponseEntity.ok(clientService.updateClient(clientId ,clientDTO));
     }
 

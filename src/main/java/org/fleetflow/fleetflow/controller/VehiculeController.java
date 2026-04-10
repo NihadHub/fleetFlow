@@ -5,6 +5,7 @@ import org.fleetflow.fleetflow.dto.vehiculeDTO.VehiculeRequestDTO;
 import org.fleetflow.fleetflow.dto.vehiculeDTO.VehiculeResponseDTO;
 import org.fleetflow.fleetflow.enums.StatutVehicule;
 import org.fleetflow.fleetflow.service.VehiculeService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,13 +23,13 @@ public class VehiculeController {
     }
 
     @PostMapping
-    public ResponseEntity<VehiculeResponseDTO> addVehicule(@RequestBody VehiculeRequestDTO vehiculeDTO){
+    public ResponseEntity<VehiculeResponseDTO> addVehicule(@Valid @RequestBody VehiculeRequestDTO vehiculeDTO){
         VehiculeResponseDTO vehicule = vehiculeService.addVehicule(vehiculeDTO);
         return new ResponseEntity<>(vehicule ,HttpStatus.CREATED);
     }
 
     @PutMapping("/{vehiculeId}")
-    public ResponseEntity<VehiculeResponseDTO> updateVehicule(@PathVariable Long vehiculeId , @RequestBody VehiculeRequestDTO vehiculeDTO){
+    public ResponseEntity<VehiculeResponseDTO> updateVehicule(@PathVariable Long vehiculeId , @Valid @RequestBody VehiculeRequestDTO vehiculeDTO){
         return ResponseEntity.ok(vehiculeService.updateVehicule(vehiculeId ,vehiculeDTO));
     }
 

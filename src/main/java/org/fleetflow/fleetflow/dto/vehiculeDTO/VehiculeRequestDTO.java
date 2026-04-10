@@ -16,4 +16,5 @@ public class VehiculeRequestDTO {
     private double capacite;
     @NotNull(message = "Le statut est obligatoire")
     private StatutVehicule statut;
+
 }

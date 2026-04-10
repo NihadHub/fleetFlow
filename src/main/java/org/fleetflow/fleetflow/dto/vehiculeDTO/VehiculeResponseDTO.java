@@ -10,4 +10,5 @@ public class VehiculeResponseDTO {
     private TypeVehicule type;
     private double capacite;
     private StatutVehicule statut;
+    private Long CountVehicule;
 }

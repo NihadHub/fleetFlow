@@ -5,18 +5,22 @@ import org.fleetflow.fleetflow.dto.vehiculeDTO.VehiculeResponseDTO;
 import org.fleetflow.fleetflow.entity.Vehicule;
 import org.fleetflow.fleetflow.enums.StatutVehicule;
 import org.fleetflow.fleetflow.mapper.VehiculeMapper;
+import org.fleetflow.fleetflow.repository.LivraisonRepository;
 import org.fleetflow.fleetflow.repository.VehiculeRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class VehiculeService {
+    private final LivraisonRepository livraisonRepository;
     private VehiculeRepository vehiculeRepository;
     private VehiculeMapper vehiculeMapper;
-    public VehiculeService(VehiculeRepository vehiculeRepository , VehiculeMapper vehiculeMapper){
+    public VehiculeService(VehiculeRepository vehiculeRepository , VehiculeMapper vehiculeMapper, LivraisonRepository livraisonRepository){
         this.vehiculeRepository = vehiculeRepository;
         this.vehiculeMapper = vehiculeMapper;
+        this.livraisonRepository = livraisonRepository;
     }
 
     public VehiculeResponseDTO addVehicule(VehiculeRequestDTO vehiculeDTO){
@@ -42,9 +46,13 @@ public class VehiculeService {
                 .map(vehiculeMapper::toDTO).toList();
     }
 
-    public List<VehiculeResponseDTO> getVehiculeByStatut(StatutVehicule statut){
-        return vehiculeRepository.findVehiculeByStatut(statut).stream()
-                .map(vehiculeMapper::toDTO).toList();
+    public List<VehiculeResponseDTO> getVehiculeByStatut(StatutVehicule statut) {
+        return vehiculeRepository.findVehiculeByStatut(statut).stream().map(v -> {
+            long countVehicule = livraisonRepository.countByVehicule_VehiculeId(statut);
+            VehiculeResponseDTO dto = vehiculeMapper.toDTO(v);
+            dto.setCountVehicule(countVehicule);
+            return dto;
+        }).toList();
     }
 
     public List<VehiculeResponseDTO> getVehiculeByCapaciteGreaterThan(double capacite){

@@ -14,12 +14,11 @@ import java.util.List;
 
 @Service
 public class VehiculeService {
+    private final VehiculeRepository vehiculeRepository;
+    private final VehiculeMapper vehiculeMapper;
     private final LivraisonRepository livraisonRepository;
-    private VehiculeRepository vehiculeRepository;
-    private VehiculeMapper vehiculeMapper;
-    private LivraisonRepository livraisonRepository;
 
-    public VehiculeService(VehiculeRepository vehiculeRepository , VehiculeMapper vehiculeMapper , LivraisonRepository livraisonRepository){
+    public VehiculeService(VehiculeRepository vehiculeRepository, VehiculeMapper vehiculeMapper, LivraisonRepository livraisonRepository) {
         this.vehiculeRepository = vehiculeRepository;
         this.vehiculeMapper = vehiculeMapper;
         this.livraisonRepository = livraisonRepository;

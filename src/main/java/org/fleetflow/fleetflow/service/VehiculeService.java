@@ -47,13 +47,18 @@ public class VehiculeService {
                 .map(vehiculeMapper::toDTO).toList();
     }
 
-    public List<VehiculeResponseDTO> getVehiculeByStatut(StatutVehicule statut) {
-        return vehiculeRepository.findVehiculeByStatut(statut).stream().map(v -> {
-            long countVehicule = livraisonRepository.countByVehicule_VehiculeId(statut);
-            VehiculeResponseDTO dto = vehiculeMapper.toDTO(v);
-            dto.setCountVehicule(countVehicule);
-            return dto;
-        }).toList();
+//    public List<VehiculeResponseDTO> getVehiculeByStatut(StatutVehicule statut) {
+//        return vehiculeRepository.findVehiculeByStatut(statut).stream().map(v -> {
+//            long countVehicule = livraisonRepository.countByVehicule_VehiculeId(statut);
+//            VehiculeResponseDTO dto = vehiculeMapper.toDTO(v);
+//            dto.setCountVehicule(countVehicule);
+//            return dto;
+//        }).toList();
+//    }
+
+    public List<VehiculeResponseDTO> getVehiculeByStatut(StatutVehicule statut){
+        return vehiculeRepository.findVehiculeByStatut(statut).stream()
+                .map(vehiculeMapper::toDTO).toList();
     }
 
     public List<VehiculeResponseDTO> getVehiculeByCapaciteGreaterThan(double capacite){

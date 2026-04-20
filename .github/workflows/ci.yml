@@ -7,19 +7,22 @@ on:
     branches: [ "Client_Vehicule" ]
 
 jobs:
-  build:
+  build-test: # Smiya dyal l'job kifma matloub
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout du code
       uses: actions/checkout@v4
 
-    - name: Set up JDK 17
+    - name: Setup Java
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
 
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
+    - name: Lancer les tests
+      run: mvn test
+
+    - name: Lancer le package (produire le JAR)
+      run: mvn package -DskipTests

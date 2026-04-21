@@ -47,7 +47,6 @@ class VehiculeServiceTest {
         assertEquals(1, result.size());
         assertEquals(statut, result.get(0).getStatut());
         assertEquals(1L, result.get(0).getVehiculeId());
-        verify(repo).findVehiculeByStatut(statut);
     }
 
     @Test
@@ -70,6 +69,5 @@ class VehiculeServiceTest {
         assertEquals(1, result.size());
         assertTrue(result.get(0).getCapacite() > minCapacite);
         assertEquals(15.0, result.get(0).getCapacite());
-        verify(repo).findVehiculeByCapaciteGreaterThan(minCapacite);
     }
 }

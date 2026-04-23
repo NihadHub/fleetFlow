@@ -4,6 +4,7 @@ services:
     ports:
       - "8081:8081"
     container_name: fleetflow-app
+    restart: always
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/FleetFlow?createDatabaseIfNotExist=true
       - SPRING_DATASOURCE_USERNAME=root

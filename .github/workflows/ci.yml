@@ -1,0 +1,28 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "Client_Vehicule" ]
+  pull_request:
+    branches: [ "Client_Vehicule" ]
+
+jobs:
+  build-test: # Smiya dyal l'job kifma matloub
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v4
+
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Lancer les tests
+      run: mvn test
+
+    - name: Lancer le package (produire le JAR)
+      run: mvn package -DskipTests

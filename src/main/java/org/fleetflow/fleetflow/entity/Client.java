@@ -19,12 +19,14 @@ public class Client {
     private String telephone;
     private String ville;
     private String email;
+    private String password;
 
-    public Client(String nom, String telephone, String ville, String email) {
+    public Client(String nom, String telephone, String ville, String email , String password) {
         this.nom = nom;
         this.telephone = telephone;
         this.ville = ville;
         this.email = email;
+        this.password = password;
     }
 
     public Client() {

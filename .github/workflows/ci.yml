@@ -7,7 +7,7 @@ on:
     branches: [ "Client_Vehicule" ]
 
 jobs:
-  build-test: # Smiya dyal l'job kifma matloub
+  build-test: 
     runs-on: ubuntu-latest
 
     steps:

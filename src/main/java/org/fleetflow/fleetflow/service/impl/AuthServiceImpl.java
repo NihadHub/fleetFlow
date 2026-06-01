@@ -1,5 +1,6 @@
-package org.fleetflow.fleetflow.service;
+package org.fleetflow.fleetflow.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.fleetflow.fleetflow.dto.securityDTO.AuthResponse;
 import org.fleetflow.fleetflow.dto.securityDTO.LoginRequest;
@@ -10,6 +11,7 @@ import org.fleetflow.fleetflow.enums.RoleUser;
 import org.fleetflow.fleetflow.repository.ChauffeurRepository;
 import org.fleetflow.fleetflow.repository.UserRepository;
 import org.fleetflow.fleetflow.security.JwtUtil;
+import org.fleetflow.fleetflow.service.interfaces.AuthService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,21 +19,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-public class AuthService {
+@RequiredArgsConstructor
+public class AuthServiceImpl implements AuthService {
     private final UserRepository repo;
     private final ChauffeurRepository chauffeurRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
 
-    public AuthService(UserRepository repo, ChauffeurRepository chauffeurRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil, AuthenticationManager authenticationManager) {
-        this.repo = repo;
-        this.chauffeurRepository = chauffeurRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.jwtUtil = jwtUtil;
-        this.authenticationManager = authenticationManager;
-    }
-
+    @Override
     public AuthResponse register(RegistreRequest request) {
         User existing = repo.findByEmail(request.email());
 
@@ -50,7 +46,7 @@ public class AuthService {
             Chauffeur chauffeur = new Chauffeur();
             chauffeur.setNom(user.getUsername());
             chauffeur.setUser(user);
-            user.setPatient(chauffeur);
+            user.setChauffeur(chauffeur);
         }
 
         repo.save(user);
@@ -59,6 +55,7 @@ public class AuthService {
         return new AuthResponse(token);
     }
 
+    @Override
     public AuthResponse login(LoginRequest request) {
         try {
             UsernamePasswordAuthenticationToken authToken =

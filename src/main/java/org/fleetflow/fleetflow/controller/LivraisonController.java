@@ -2,7 +2,7 @@ package org.fleetflow.fleetflow.controller;
 import org.fleetflow.fleetflow.dto.LivraisonAssignDTO;
 import org.fleetflow.fleetflow.dto.LivraisonDTO;
 import org.fleetflow.fleetflow.enums.StatutLivraison;
-import org.fleetflow.fleetflow.service.LivraisonService;
+import org.fleetflow.fleetflow.service.interfaces.LivraisonService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

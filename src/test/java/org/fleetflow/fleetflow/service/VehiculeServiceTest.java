@@ -3,9 +3,10 @@ package org.fleetflow.fleetflow.service;
 import org.fleetflow.fleetflow.dto.vehiculeDTO.VehiculeResponseDTO;
 import org.fleetflow.fleetflow.entity.Vehicule;
 import org.fleetflow.fleetflow.enums.StatutVehicule;
-import org.fleetflow.fleetflow.enums.TypeVehicule;
 import org.fleetflow.fleetflow.mapper.VehiculeMapper;
 import org.fleetflow.fleetflow.repository.VehiculeRepository;
+import org.fleetflow.fleetflow.service.interfaces.VehiculeService;
+import org.fleetflow.fleetflow.service.impl.VehiculeServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,7 +26,7 @@ class VehiculeServiceTest {
     @Mock
     private VehiculeMapper mapper;
     @InjectMocks
-    private VehiculeService service;
+    private VehiculeServiceImpl service;
 
     @Test
     void getVehiculeByStatut() {

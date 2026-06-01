@@ -1,24 +1,28 @@
-package org.fleetflow.fleetflow.service;
+package org.fleetflow.fleetflow.service.impl;
 
-import org.fleetflow.fleetflow.mapper.ClientMapper;
+import lombok.RequiredArgsConstructor;
 import org.fleetflow.fleetflow.dto.clientDTO.ClientRequestDTO;
 import org.fleetflow.fleetflow.dto.clientDTO.ClientResponseDTO;
 import org.fleetflow.fleetflow.entity.Client;
+import org.fleetflow.fleetflow.mapper.ClientMapper;
 import org.fleetflow.fleetflow.repository.ClientRepository;
+import org.fleetflow.fleetflow.service.interfaces.ClientService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-public class ClientService {
-    private ClientRepository clientRepository;
-    private ClientMapper clientMapper;
-    public ClientService(ClientRepository clientRepository , ClientMapper clientMapper){
-        this.clientRepository = clientRepository;
-        this.clientMapper = clientMapper;
-    }
+@RequiredArgsConstructor
+@Transactional
+public class ClientServiceImpl implements ClientService {
 
-    public ClientResponseDTO addClient(ClientRequestDTO clientDTO){
+    private final ClientRepository clientRepository;
+    private final ClientMapper clientMapper;
+
+
+    @Override
+    public ClientResponseDTO addClient(ClientRequestDTO clientDTO) {
         Client emailDejaExists =clientRepository.findClientByEmail(clientDTO.getEmail());
         if (emailDejaExists != null){
             throw new RuntimeException("Client deja exists.");
@@ -28,7 +32,8 @@ public class ClientService {
         return clientMapper.toResponseDTO(client);
     }
 
-    public ClientResponseDTO updateClient(Long clientId , ClientRequestDTO clientDTO){
+    @Override
+    public ClientResponseDTO updateClient(Long clientId, ClientRequestDTO clientDTO) {
         Client existsClient = clientRepository.findById(clientId)
                 .orElseThrow(()-> new RuntimeException("Client introuvable."));
         clientMapper.updateClientFromDto(clientDTO , existsClient);
@@ -36,11 +41,13 @@ public class ClientService {
         return clientMapper.toResponseDTO(updateClient);
     }
 
-    public void deleteClient(Long clientId){
+    @Override
+    public void deleteClient(Long clientId) {
         clientRepository.deleteById(clientId);
     }
 
-    public List<ClientResponseDTO> getAllClient(){
+    @Override
+    public List<ClientResponseDTO> getAllClient() {
         return clientRepository.findAll().stream()
                 .map(clientMapper::toResponseDTO).toList();
     }

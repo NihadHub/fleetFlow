@@ -1,6 +1,6 @@
-package org.fleetflow.fleetflow.service;
+package org.fleetflow.fleetflow.service.impl;
+
 import lombok.RequiredArgsConstructor;
-import org.fleetflow.fleetflow.dto.ChauffeurDTO;
 import org.fleetflow.fleetflow.dto.LivraisonAssignDTO;
 import org.fleetflow.fleetflow.dto.LivraisonDTO;
 import org.fleetflow.fleetflow.entity.Chauffeur;
@@ -9,29 +9,29 @@ import org.fleetflow.fleetflow.entity.Livraison;
 import org.fleetflow.fleetflow.entity.Vehicule;
 import org.fleetflow.fleetflow.enums.StatutLivraison;
 import org.fleetflow.fleetflow.enums.StatutVehicule;
-import org.fleetflow.fleetflow.mapper.ChauffeurMapper;
 import org.fleetflow.fleetflow.mapper.LivraisonMapper;
 import org.fleetflow.fleetflow.repository.ChauffeurRepository;
 import org.fleetflow.fleetflow.repository.ClientRepository;
 import org.fleetflow.fleetflow.repository.LivraisonRepository;
 import org.fleetflow.fleetflow.repository.VehiculeRepository;
+import org.fleetflow.fleetflow.service.interfaces.LivraisonService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class LivraisonService {
+public class LivraisonServiceImpl implements LivraisonService {
     private final LivraisonRepository livraisonRepository;
     private final ClientRepository clientRepository;
     private final ChauffeurRepository chauffeurRepository;
     private final VehiculeRepository vehiculeRepository;
     private final LivraisonMapper livraisonMapper;
-    private final ChauffeurMapper chauffeurMapper;
+
+    @Override
     public LivraisonDTO creerLivraison(LivraisonDTO dto) {
         Client client = clientRepository.findById(dto.getClientId())
                 .orElseThrow(() -> new RuntimeException(
@@ -73,6 +73,7 @@ public class LivraisonService {
         return livraisonMapper.toDTO(saved);
     }
 
+    @Override
     public LivraisonDTO assignerChauffeurEtVehicule(Long livraisonId, LivraisonAssignDTO assignDTO) {
         Livraison livraison = livraisonRepository.findById(livraisonId)
                 .orElseThrow(() -> new RuntimeException(
@@ -112,36 +113,40 @@ public class LivraisonService {
         return livraisonMapper.toDTO(updated);
     }
 
+
+    @Override
     public LivraisonDTO modifierStatut(Long livraisonId, StatutLivraison nouveauStatut) {
-        Livraison livraison = livraisonRepository.findById(livraisonId)
-                .orElseThrow(() -> new RuntimeException(
-                        "Livraison non trouvée avec l'id : " + livraisonId));
 
-        StatutLivraison ancienStatut = livraison.getStatut();
-        livraison.setStatut(nouveauStatut);
+            Livraison livraison = livraisonRepository.findById(livraisonId)
+                    .orElseThrow(() -> new RuntimeException(
+                            "Livraison non trouvée avec l'id : " + livraisonId));
+
+            StatutLivraison ancienStatut = livraison.getStatut();
+            livraison.setStatut(nouveauStatut);
 
 
-        if (nouveauStatut == StatutLivraison.LIVRE) {
-            if (livraison.getChauffeur() != null) {
-                livraison.getChauffeur().setDisponible(true);
-                chauffeurRepository.save(livraison.getChauffeur());
+            if (nouveauStatut == StatutLivraison.LIVRE || nouveauStatut == StatutLivraison.ANNULEE) {
+                if (livraison.getChauffeur() != null) {
+                    livraison.getChauffeur().setDisponible(true);
+                    chauffeurRepository.save(livraison.getChauffeur());
+                }
+                if (livraison.getVehicule() != null) {
+                    livraison.getVehicule().setStatut(StatutVehicule.DISPONIBLE);
+                    vehiculeRepository.save(livraison.getVehicule());
+                }
             }
-            if (livraison.getVehicule() != null) {
-                livraison.getVehicule().setStatut(StatutVehicule.DISPONIBLE);
-                vehiculeRepository.save(livraison.getVehicule());
-            }
-        }
 
-        Livraison updated = livraisonRepository.save(livraison);
-        return livraisonMapper.toDTO(updated);
+            Livraison updated = livraisonRepository.save(livraison);
+            return livraisonMapper.toDTO(updated);
+
     }
 
-    @Transactional(readOnly = true)
+    @Override
     public List<LivraisonDTO> listerTout() {
         return livraisonMapper.toDTOList(livraisonRepository.findAll());
     }
 
-    @Transactional(readOnly = true)
+    @Override
     public LivraisonDTO getLivraisonById(Long id) {
         Livraison livraison = livraisonRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException(
@@ -149,26 +154,25 @@ public class LivraisonService {
         return livraisonMapper.toDTO(livraison);
     }
 
-    @Transactional(readOnly = true)
+    @Override
     public List<LivraisonDTO> listerParStatut(StatutLivraison statut) {
         return livraisonMapper.toDTOList(livraisonRepository.findByStatut(statut));
     }
 
-    @Transactional(readOnly = true)
+    @Override
     public List<LivraisonDTO> listerParClient(Long clientId) {
         return livraisonMapper.toDTOList(livraisonRepository.findByClientClientId(clientId));
     }
 
-    @Transactional(readOnly = true)
+    @Override
     public List<LivraisonDTO> listerEntreDeuxDates(LocalDate dateDebut, LocalDate dateFin) {
         return livraisonMapper.toDTOList(
                 livraisonRepository.findLivraisonsEntreDeuxDates(dateDebut, dateFin));
     }
 
-    @Transactional(readOnly = true)
+    @Override
     public List<LivraisonDTO> listerParVilleDestination(String ville) {
         return livraisonMapper.toDTOList(
                 livraisonRepository.findLivraisonsParVilleDestination(ville));
     }
-
 }

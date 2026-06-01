@@ -1,7 +1,7 @@
 package org.fleetflow.fleetflow.controller;
 
 import org.fleetflow.fleetflow.dto.ChauffeurDTO;
-import org.fleetflow.fleetflow.service.ChauffeurService;
+import org.fleetflow.fleetflow.service.interfaces.ChauffeurService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

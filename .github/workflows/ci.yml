@@ -2,9 +2,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "Client_Vehicule" ]
+    branches: [ "security-parte" ]
   pull_request:
-    branches: [ "Client_Vehicule" ]
+    branches: [ "security-parte" ]
 
 jobs:
   build-test: # Smiya dyal l'job kifma matloub

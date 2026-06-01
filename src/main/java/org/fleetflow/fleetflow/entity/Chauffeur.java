@@ -27,4 +27,8 @@ public class Chauffeur {
 
     @Column(nullable = false)
     private Boolean disponible;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

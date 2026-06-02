@@ -13,6 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
 public class User implements UserDetails {
@@ -25,10 +26,6 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private RoleUser role;
     private String password;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private Chauffeur chauffeur;
 
     public User(String username, String email, String password) {
         this.username = username;

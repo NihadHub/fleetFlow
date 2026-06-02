@@ -1,0 +1,12 @@
+CREATE TABLE users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    role ENUM('ADMIN', 'MANAGER', 'CHAUFFEUR') NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+-- Refactor chauffeurs table for JOINED inheritance
+ALTER TABLE chauffeurs DROP COLUMN id;
+ALTER TABLE chauffeurs ADD COLUMN id BIGINT PRIMARY KEY;
+ALTER TABLE chauffeurs ADD CONSTRAINT fk_chauffeurs_user_id FOREIGN KEY (id) REFERENCES users(id) ON DELETE CASCADE;

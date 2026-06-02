@@ -36,18 +36,22 @@ public class AuthServiceImpl implements AuthService {
             throw new RuntimeException("Email déjà utilisé");
         }
 
-        User user = new User();
+        User user;
+        if (request.role() == RoleUser.CHAUFFEUR) {
+            Chauffeur chauffeur = new Chauffeur();
+            chauffeur.setNom(request.username()); // Default name
+            chauffeur.setDisponible(true); // Default status
+            // Note: telephone and permisType are NOT NULL in DB, 
+            // you might want to add them to RegistreRequest later.
+            user = chauffeur;
+        } else {
+            user = new User();
+        }
+
         user.setUsername(request.username());
         user.setEmail(request.email());
         user.setPassword(passwordEncoder.encode(request.password()));
         user.setRole(request.role());
-
-        if (request.role() == RoleUser.CHAUFFEUR) {
-            Chauffeur chauffeur = new Chauffeur();
-            chauffeur.setNom(user.getUsername());
-            chauffeur.setUser(user);
-            user.setChauffeur(chauffeur);
-        }
 
         repo.save(user);
 

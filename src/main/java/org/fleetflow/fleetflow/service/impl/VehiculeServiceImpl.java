@@ -8,10 +8,11 @@ import org.fleetflow.fleetflow.enums.StatutVehicule;
 import org.fleetflow.fleetflow.mapper.VehiculeMapper;
 import org.fleetflow.fleetflow.repository.VehiculeRepository;
 import org.fleetflow.fleetflow.service.interfaces.VehiculeService;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import org.springframework.data.domain.Pageable;
 
 @Service
 @RequiredArgsConstructor
@@ -43,20 +44,21 @@ public class VehiculeServiceImpl implements VehiculeService {
     }
 
     @Override
-    public List<VehiculeResponseDTO> getAllVehicule() {
-        return vehiculeRepository.findAll().stream()
-                .map(vehiculeMapper::toDTO).toList();
+    public Page<VehiculeResponseDTO> getAllVehicule(Pageable pageable) {
+        Page<Vehicule> vehicules = vehiculeRepository.findAll(pageable);
+        return vehicules.map(vehiculeMapper::toDTO);
     }
 
     @Override
-    public List<VehiculeResponseDTO> getVehiculeByStatut(StatutVehicule statut) {
-        return vehiculeRepository.findVehiculeByStatut(statut).stream()
-                .map(vehiculeMapper::toDTO).toList();
+    public Page<VehiculeResponseDTO> getVehiculeByStatut(StatutVehicule statut, Pageable pageable) {
+        Page<Vehicule> vehicules = vehiculeRepository.findVehiculeByStatut(statut , pageable);
+        return vehicules.map(vehiculeMapper::toDTO);
     }
 
     @Override
-    public List<VehiculeResponseDTO> getVehiculeByCapaciteGreaterThan(double capacite) {
-        return vehiculeRepository.findVehiculeByCapaciteGreaterThan(capacite).stream()
-                .map(vehiculeMapper::toDTO).toList();
+    public Page<VehiculeResponseDTO> getVehiculeByCapaciteGreaterThan(double capacite, Pageable pageable) {
+        Page<Vehicule> vehicules = vehiculeRepository.findVehiculeByCapaciteGreaterThan(capacite , pageable);
+        return vehicules.map(vehiculeMapper::toDTO);
+
     }
 }

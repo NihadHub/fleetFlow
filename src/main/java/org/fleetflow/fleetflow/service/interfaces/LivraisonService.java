@@ -2,12 +2,11 @@ package org.fleetflow.fleetflow.service.interfaces;
 
 import org.fleetflow.fleetflow.dto.LivraisonAssignDTO;
 import org.fleetflow.fleetflow.dto.LivraisonDTO;
-import org.fleetflow.fleetflow.entity.Chauffeur;
-import org.fleetflow.fleetflow.entity.Client;
-import org.fleetflow.fleetflow.entity.Livraison;
-import org.fleetflow.fleetflow.entity.Vehicule;
+import org.fleetflow.fleetflow.entity.User;
 import org.fleetflow.fleetflow.enums.StatutLivraison;
 import org.fleetflow.fleetflow.enums.StatutVehicule;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -20,17 +19,19 @@ public interface LivraisonService {
 
     LivraisonDTO assignerChauffeurEtVehicule(Long livraisonId, LivraisonAssignDTO assignDTO);
 
-    LivraisonDTO modifierStatut(Long livraisonId, StatutLivraison nouveauStatut);
+    LivraisonDTO modifierStatut(Long livraisonId, StatutLivraison nouveauStatut, User user);
 
-    List<LivraisonDTO> listerTout();
+    Page<LivraisonDTO> listerTout(Pageable pageable);
 
     LivraisonDTO getLivraisonById(Long id);
 
-    List<LivraisonDTO> listerParStatut(StatutLivraison statut);
+    Page<LivraisonDTO> listerParStatut(StatutLivraison statut , Pageable pageable);
 
-    List<LivraisonDTO> listerParClient(Long clientId);
+    Page<LivraisonDTO> listerParClient(Long clientId , Pageable pageable);
 
-    List<LivraisonDTO> listerEntreDeuxDates(LocalDate dateDebut, LocalDate dateFin);
+    Page<LivraisonDTO> listerParChauffeur(Long chauffeurId, Pageable pageable);
 
-    List<LivraisonDTO> listerParVilleDestination(String ville);
+    Page<LivraisonDTO> listerEntreDeuxDates(LocalDate dateDebut, LocalDate dateFin , Pageable pageable);
+
+    Page<LivraisonDTO> listerParVilleDestination(String ville , Pageable pageable);
 }

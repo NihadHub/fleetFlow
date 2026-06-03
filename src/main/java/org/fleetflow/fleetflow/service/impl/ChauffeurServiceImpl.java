@@ -3,13 +3,14 @@ package org.fleetflow.fleetflow.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.fleetflow.fleetflow.dto.ChauffeurDTO;
 import org.fleetflow.fleetflow.entity.Chauffeur;
+import org.fleetflow.fleetflow.enums.StatutVehicule;
 import org.fleetflow.fleetflow.mapper.ChauffeurMapper;
 import org.fleetflow.fleetflow.repository.ChauffeurRepository;
 import org.fleetflow.fleetflow.service.interfaces.ChauffeurService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -44,13 +45,15 @@ public class ChauffeurServiceImpl implements ChauffeurService {
     }
 
     @Override
-    public List<ChauffeurDTO> listerTous() {
-        return chauffeurMapper.toDTOList(chauffeurRepository.findAll());
+    public Page<ChauffeurDTO> listerTous(Pageable pageable) {
+        Page<Chauffeur> chauffeurs = chauffeurRepository.findAll(pageable);
+        return chauffeurs.map(chauffeurMapper::toDTO);
     }
 
     @Override
-    public List<ChauffeurDTO> listerDisponibles() {
-        return chauffeurMapper.toDTOList(chauffeurRepository.findByDisponibleTrue());
+    public Page<ChauffeurDTO> listerDisponibles(Pageable pageable) {
+        Page<Chauffeur> chauffeurs = chauffeurRepository.findByDisponibleTrue(pageable);
+        return chauffeurs.map(chauffeurMapper::toDTO);
     }
 
     @Override

@@ -3,10 +3,8 @@ package org.fleetflow.fleetflow.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.fleetflow.fleetflow.dto.LivraisonAssignDTO;
 import org.fleetflow.fleetflow.dto.LivraisonDTO;
-import org.fleetflow.fleetflow.entity.Chauffeur;
-import org.fleetflow.fleetflow.entity.Client;
-import org.fleetflow.fleetflow.entity.Livraison;
-import org.fleetflow.fleetflow.entity.Vehicule;
+import org.fleetflow.fleetflow.entity.*;
+import org.fleetflow.fleetflow.enums.RoleUser;
 import org.fleetflow.fleetflow.enums.StatutLivraison;
 import org.fleetflow.fleetflow.enums.StatutVehicule;
 import org.fleetflow.fleetflow.mapper.LivraisonMapper;
@@ -15,11 +13,13 @@ import org.fleetflow.fleetflow.repository.ClientRepository;
 import org.fleetflow.fleetflow.repository.LivraisonRepository;
 import org.fleetflow.fleetflow.repository.VehiculeRepository;
 import org.fleetflow.fleetflow.service.interfaces.LivraisonService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -115,17 +115,23 @@ public class LivraisonServiceImpl implements LivraisonService {
 
 
     @Override
-    public LivraisonDTO modifierStatut(Long livraisonId, StatutLivraison nouveauStatut) {
+    public LivraisonDTO modifierStatut(Long livraisonId, StatutLivraison nouveauStatut, User user) {
 
             Livraison livraison = livraisonRepository.findById(livraisonId)
                     .orElseThrow(() -> new RuntimeException(
                             "Livraison non trouvée avec l'id : " + livraisonId));
 
-            StatutLivraison ancienStatut = livraison.getStatut();
+            // Security check for Chauffeur
+            if (user.getRole() == RoleUser.CHAUFFEUR) {
+                if (livraison.getChauffeur() == null || !livraison.getChauffeur().getId().equals(user.getId())) {
+                    throw new RuntimeException("Vous n'êtes pas autorisé à modifier cette livraison");
+                }
+            }
+
             livraison.setStatut(nouveauStatut);
 
 
-            if (nouveauStatut == StatutLivraison.LIVRE || nouveauStatut == StatutLivraison.ANNULEE) {
+            if (nouveauStatut == StatutLivraison.LIVRE || nouveauStatut == StatutLivraison.ANNULER) {
                 if (livraison.getChauffeur() != null) {
                     livraison.getChauffeur().setDisponible(true);
                     chauffeurRepository.save(livraison.getChauffeur());
@@ -142,8 +148,9 @@ public class LivraisonServiceImpl implements LivraisonService {
     }
 
     @Override
-    public List<LivraisonDTO> listerTout() {
-        return livraisonMapper.toDTOList(livraisonRepository.findAll());
+    public Page<LivraisonDTO> listerTout(Pageable pageable) {
+        Page<Livraison> livraisons = livraisonRepository.findAll(pageable);
+        return livraisons.map(livraisonMapper::toDTO);
     }
 
     @Override
@@ -155,24 +162,32 @@ public class LivraisonServiceImpl implements LivraisonService {
     }
 
     @Override
-    public List<LivraisonDTO> listerParStatut(StatutLivraison statut) {
-        return livraisonMapper.toDTOList(livraisonRepository.findByStatut(statut));
+    public Page<LivraisonDTO> listerParStatut(StatutLivraison statut , Pageable pageable) {
+        Page<Livraison> livraisons = livraisonRepository.findByStatut(statut , pageable);
+        return livraisons.map(livraisonMapper::toDTO);
     }
 
     @Override
-    public List<LivraisonDTO> listerParClient(Long clientId) {
-        return livraisonMapper.toDTOList(livraisonRepository.findByClientClientId(clientId));
+    public Page<LivraisonDTO> listerParClient(Long clientId , Pageable pageable) {
+        Page<Livraison> livraisons = livraisonRepository.findByClientClientId(clientId , pageable);
+        return livraisons.map(livraisonMapper::toDTO);
     }
 
     @Override
-    public List<LivraisonDTO> listerEntreDeuxDates(LocalDate dateDebut, LocalDate dateFin) {
-        return livraisonMapper.toDTOList(
-                livraisonRepository.findLivraisonsEntreDeuxDates(dateDebut, dateFin));
+    public Page<LivraisonDTO> listerParChauffeur(Long chauffeurId, Pageable pageable) {
+        Page<Livraison> livraisons = livraisonRepository.findByChauffeurId(chauffeurId, pageable);
+        return livraisons.map(livraisonMapper::toDTO);
     }
 
     @Override
-    public List<LivraisonDTO> listerParVilleDestination(String ville) {
-        return livraisonMapper.toDTOList(
-                livraisonRepository.findLivraisonsParVilleDestination(ville));
+    public Page<LivraisonDTO> listerEntreDeuxDates(LocalDate dateDebut, LocalDate dateFin , Pageable pageable) {
+        Page<Livraison> livraisons = livraisonRepository.findLivraisonsEntreDeuxDates(dateDebut , dateFin , pageable);
+        return livraisons.map(livraisonMapper::toDTO);
+    }
+
+    @Override
+    public Page<LivraisonDTO> listerParVilleDestination(String ville , Pageable pageable) {
+        Page<Livraison> livraisons = livraisonRepository.findLivraisonsParVilleDestination(ville , pageable);
+        return livraisons.map(livraisonMapper::toDTO);
     }
 }

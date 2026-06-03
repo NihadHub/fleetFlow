@@ -7,8 +7,8 @@ import org.fleetflow.fleetflow.enums.StatutVehicule;
 import org.fleetflow.fleetflow.mapper.VehiculeMapper;
 import org.fleetflow.fleetflow.repository.LivraisonRepository;
 import org.fleetflow.fleetflow.repository.VehiculeRepository;
-import org.springframework.stereotype.Service;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface VehiculeService {
@@ -19,9 +19,9 @@ public interface VehiculeService {
 
     void deleteVehicule(Long vehiculeId);
 
-    List<VehiculeResponseDTO> getAllVehicule();
+    Page<VehiculeResponseDTO> getAllVehicule(Pageable pageable);
 
-    List<VehiculeResponseDTO> getVehiculeByStatut(StatutVehicule statut);
+    Page<VehiculeResponseDTO> getVehiculeByStatut(StatutVehicule statut , Pageable pageable);
 
-    List<VehiculeResponseDTO> getVehiculeByCapaciteGreaterThan(double capacite);
+    Page<VehiculeResponseDTO> getVehiculeByCapaciteGreaterThan(double capacite , Pageable pageable);
 }

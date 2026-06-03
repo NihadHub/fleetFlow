@@ -7,10 +7,12 @@ import org.fleetflow.fleetflow.entity.Client;
 import org.fleetflow.fleetflow.mapper.ClientMapper;
 import org.fleetflow.fleetflow.repository.ClientRepository;
 import org.fleetflow.fleetflow.service.interfaces.ClientService;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -47,8 +49,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public List<ClientResponseDTO> getAllClient() {
-        return clientRepository.findAll().stream()
-                .map(clientMapper::toResponseDTO).toList();
+    public Page<ClientResponseDTO> getAllClient(Pageable pageable) {
+        Page<Client> clients = clientRepository.findAll(pageable);
+        return clients.map(clientMapper::toResponseDTO);
     }
 }

@@ -1,4 +1,4 @@
-package org.fleetflow.fleetflow.service.interfaces;
+package org.fleetflow.fleetflow.service.impl;
 
 import org.fleetflow.fleetflow.entity.User;
 import org.fleetflow.fleetflow.repository.UserRepository;

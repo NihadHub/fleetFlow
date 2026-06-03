@@ -2,13 +2,12 @@ package org.fleetflow.fleetflow.service.interfaces;
 import lombok.RequiredArgsConstructor;
 import org.fleetflow.fleetflow.entity.Chauffeur;
 import org.fleetflow.fleetflow.dto.ChauffeurDTO;
+import org.fleetflow.fleetflow.enums.StatutVehicule;
 import org.fleetflow.fleetflow.repository.ChauffeurRepository;
 import org.fleetflow.fleetflow.mapper.ChauffeurMapper;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
-
 
 public interface ChauffeurService {
     ChauffeurDTO ajouterChauffeur(ChauffeurDTO chauffeurDTO);
@@ -17,11 +16,9 @@ public interface ChauffeurService {
 
     void supprimerChauffeur(Long id);
 
-    List<ChauffeurDTO> listerTous();
+    Page<ChauffeurDTO> listerTous(Pageable pageable);
 
-    List<ChauffeurDTO> listerDisponibles();
+    Page<ChauffeurDTO> listerDisponibles(Pageable pageable);
 
     ChauffeurDTO getChauffeurById(Long id);
-
-
 }

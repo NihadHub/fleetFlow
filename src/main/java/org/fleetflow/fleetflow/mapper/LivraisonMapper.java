@@ -10,7 +10,6 @@ public interface  LivraisonMapper {
     @Mapping(source = "livraisonId", target = "livraisonId")
     @Mapping(source = "client.clientId", target = "clientId")
     @Mapping(source = "client.nom", target = "clientNom")
-    @Mapping(source = "chauffeur.chauffeurId", target = "chauffeurId")
     @Mapping(source = "chauffeur.nom", target = "chauffeurNom")
     @Mapping(source = "vehicule.vehiculeId", target = "vehiculeId")
     @Mapping(source = "vehicule.matricule", target = "vehiculeMatricule")

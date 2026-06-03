@@ -4,6 +4,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.fleetflow.fleetflow.enums.RoleUser;
+import org.fleetflow.fleetflow.enums.TypePermis;
 
 public record RegistreRequest(
 
@@ -18,7 +19,11 @@ public record RegistreRequest(
         RoleUser role,
 
         @NotBlank(message = "password obligatoire")
-        String password
+        String password,
+
+        String telephone,
+
+        TypePermis permisType
 
 ) {
 }

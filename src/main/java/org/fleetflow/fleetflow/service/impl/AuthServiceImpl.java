@@ -39,10 +39,10 @@ public class AuthServiceImpl implements AuthService {
         User user;
         if (request.role() == RoleUser.CHAUFFEUR) {
             Chauffeur chauffeur = new Chauffeur();
-            chauffeur.setNom(request.username()); // Default name
-            chauffeur.setDisponible(true); // Default status
-            // Note: telephone and permisType are NOT NULL in DB, 
-            // you might want to add them to RegistreRequest later.
+            chauffeur.setNom(request.username()); 
+            chauffeur.setDisponible(true); 
+            chauffeur.setTelephone(request.telephone());
+            chauffeur.setPermisType(request.permisType());
             user = chauffeur;
         } else {
             user = new User();

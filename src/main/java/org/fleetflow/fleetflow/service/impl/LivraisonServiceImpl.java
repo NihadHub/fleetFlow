@@ -120,14 +120,11 @@ public class LivraisonServiceImpl implements LivraisonService {
             Livraison livraison = livraisonRepository.findById(livraisonId)
                     .orElseThrow(() -> new RuntimeException(
                             "Livraison non trouvée avec l'id : " + livraisonId));
-
-            // Security check for Chauffeur
             if (user.getRole() == RoleUser.CHAUFFEUR) {
                 if (livraison.getChauffeur() == null || !livraison.getChauffeur().getId().equals(user.getId())) {
                     throw new RuntimeException("Vous n'êtes pas autorisé à modifier cette livraison");
                 }
             }
-
             livraison.setStatut(nouveauStatut);
 
 

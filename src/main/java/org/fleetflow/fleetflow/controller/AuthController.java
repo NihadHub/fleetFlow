@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.fleetflow.fleetflow.dto.securityDTO.AuthResponse;
 import org.fleetflow.fleetflow.dto.securityDTO.LoginRequest;
 import org.fleetflow.fleetflow.dto.securityDTO.RegistreRequest;
+import org.fleetflow.fleetflow.service.AuthService;
 import org.fleetflow.fleetflow.service.impl.AuthServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    private AuthServiceImpl authService;
+    private AuthService authService;
 
     public AuthController(AuthServiceImpl authService){
         this.authService = authService;

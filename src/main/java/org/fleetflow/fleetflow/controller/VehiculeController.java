@@ -4,15 +4,13 @@ import jakarta.validation.Valid;
 import org.fleetflow.fleetflow.dto.vehiculeDTO.VehiculeRequestDTO;
 import org.fleetflow.fleetflow.dto.vehiculeDTO.VehiculeResponseDTO;
 import org.fleetflow.fleetflow.enums.StatutVehicule;
-import org.fleetflow.fleetflow.service.interfaces.VehiculeService;
+import org.fleetflow.fleetflow.service.VehiculeService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/vehicules")

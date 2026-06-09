@@ -3,15 +3,13 @@ package org.fleetflow.fleetflow.controller;
 import jakarta.validation.Valid;
 import org.fleetflow.fleetflow.dto.clientDTO.ClientRequestDTO;
 import org.fleetflow.fleetflow.dto.clientDTO.ClientResponseDTO;
-import org.fleetflow.fleetflow.service.interfaces.ClientService;
+import org.fleetflow.fleetflow.service.ClientService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/clients")

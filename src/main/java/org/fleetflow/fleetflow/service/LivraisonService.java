@@ -1,16 +1,13 @@
-package org.fleetflow.fleetflow.service.interfaces;
+package org.fleetflow.fleetflow.service;
 
 import org.fleetflow.fleetflow.dto.LivraisonAssignDTO;
 import org.fleetflow.fleetflow.dto.LivraisonDTO;
 import org.fleetflow.fleetflow.entity.User;
 import org.fleetflow.fleetflow.enums.StatutLivraison;
-import org.fleetflow.fleetflow.enums.StatutVehicule;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.List;
 
 
 public interface LivraisonService {

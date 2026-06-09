@@ -3,7 +3,7 @@ import org.fleetflow.fleetflow.dto.LivraisonAssignDTO;
 import org.fleetflow.fleetflow.dto.LivraisonDTO;
 import org.fleetflow.fleetflow.entity.User;
 import org.fleetflow.fleetflow.enums.StatutLivraison;
-import org.fleetflow.fleetflow.service.interfaces.LivraisonService;
+import org.fleetflow.fleetflow.service.LivraisonService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -17,7 +17,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
 import java.time.LocalDate;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/livraisons")

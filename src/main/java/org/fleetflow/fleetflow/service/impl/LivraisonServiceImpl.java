@@ -12,7 +12,7 @@ import org.fleetflow.fleetflow.repository.ChauffeurRepository;
 import org.fleetflow.fleetflow.repository.ClientRepository;
 import org.fleetflow.fleetflow.repository.LivraisonRepository;
 import org.fleetflow.fleetflow.repository.VehiculeRepository;
-import org.fleetflow.fleetflow.service.interfaces.LivraisonService;
+import org.fleetflow.fleetflow.service.LivraisonService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,7 @@
 package org.fleetflow.fleetflow.controller;
 
 import org.fleetflow.fleetflow.dto.ChauffeurDTO;
-import org.fleetflow.fleetflow.enums.StatutVehicule;
-import org.fleetflow.fleetflow.service.interfaces.ChauffeurService;
+import org.fleetflow.fleetflow.service.ChauffeurService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -13,8 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/chauffeurs")

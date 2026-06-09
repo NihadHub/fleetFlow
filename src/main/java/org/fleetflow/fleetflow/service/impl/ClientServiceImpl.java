@@ -6,7 +6,7 @@ import org.fleetflow.fleetflow.dto.clientDTO.ClientResponseDTO;
 import org.fleetflow.fleetflow.entity.Client;
 import org.fleetflow.fleetflow.mapper.ClientMapper;
 import org.fleetflow.fleetflow.repository.ClientRepository;
-import org.fleetflow.fleetflow.service.interfaces.ClientService;
+import org.fleetflow.fleetflow.service.ClientService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

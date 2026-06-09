@@ -11,7 +11,7 @@ import org.fleetflow.fleetflow.enums.RoleUser;
 import org.fleetflow.fleetflow.repository.ChauffeurRepository;
 import org.fleetflow.fleetflow.repository.UserRepository;
 import org.fleetflow.fleetflow.security.JwtUtil;
-import org.fleetflow.fleetflow.service.interfaces.AuthService;
+import org.fleetflow.fleetflow.service.AuthService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;

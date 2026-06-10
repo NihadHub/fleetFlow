@@ -5,15 +5,10 @@ import lombok.*;
 
 @Entity
 @Table(name = "chauffeurs")
+@PrimaryKeyJoinColumn(name = "id")
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
-@Builder
-public class Chauffeur {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long chauffeurId;
+public class Chauffeur extends User {
 
     @Column(nullable = false)
     private String nom;

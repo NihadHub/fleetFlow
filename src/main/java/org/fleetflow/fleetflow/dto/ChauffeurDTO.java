@@ -6,7 +6,14 @@ import lombok.*;
 @AllArgsConstructor @NoArgsConstructor
 @Builder
 public class ChauffeurDTO {
-    private Long chauffeurId;
+    private Long id;
+
+    @NotBlank(message = "Le nom d'utilisateur est obligatoire")
+    private String username;
+
+    @Email(message = "Email invalide")
+    @NotBlank(message = "L'email est obligatoire")
+    private String email;
 
     @NotBlank(message = "le nom est obligatoire")
     private String nom;
@@ -19,6 +26,4 @@ public class ChauffeurDTO {
 
     @NotNull(message = "La disponibilité est obligatoire")
     private Boolean disponible;
-
-
 }

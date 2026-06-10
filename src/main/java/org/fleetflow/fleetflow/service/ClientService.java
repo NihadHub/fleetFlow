@@ -1,47 +1,18 @@
 package org.fleetflow.fleetflow.service;
 
-import org.fleetflow.fleetflow.mapper.ClientMapper;
 import org.fleetflow.fleetflow.dto.clientDTO.ClientRequestDTO;
 import org.fleetflow.fleetflow.dto.clientDTO.ClientResponseDTO;
-import org.fleetflow.fleetflow.entity.Client;
-import org.fleetflow.fleetflow.repository.ClientRepository;
-import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
-@Service
-public class ClientService {
-    private ClientRepository clientRepository;
-    private ClientMapper clientMapper;
-    public ClientService(ClientRepository clientRepository , ClientMapper clientMapper){
-        this.clientRepository = clientRepository;
-        this.clientMapper = clientMapper;
-    }
+public interface ClientService {
 
-    public ClientResponseDTO addClient(ClientRequestDTO clientDTO){
-        Client emailDejaExists =clientRepository.findClientByEmail(clientDTO.getEmail());
-        if (emailDejaExists != null){
-            throw new RuntimeException("Client deja exists.");
-        }
-        Client clientMapperEntity = clientMapper.toEntity(clientDTO);
-        Client client = clientRepository.save(clientMapperEntity);
-        return clientMapper.toResponseDTO(client);
-    }
+    ClientResponseDTO addClient(ClientRequestDTO clientDTO);
 
-    public ClientResponseDTO updateClient(Long clientId , ClientRequestDTO clientDTO){
-        Client existsClient = clientRepository.findById(clientId)
-                .orElseThrow(()-> new RuntimeException("Client introuvable."));
-        clientMapper.updateClientFromDto(clientDTO , existsClient);
-        Client updateClient = clientRepository.save(existsClient);
-        return clientMapper.toResponseDTO(updateClient);
-    }
+    ClientResponseDTO updateClient(Long clientId , ClientRequestDTO clientDTO);
 
-    public void deleteClient(Long clientId){
-        clientRepository.deleteById(clientId);
-    }
+    void deleteClient(Long clientId);
 
-    public List<ClientResponseDTO> getAllClient(){
-        return clientRepository.findAll().stream()
-                .map(clientMapper::toResponseDTO).toList();
-    }
+    Page<ClientResponseDTO> getAllClient(Pageable pageable);
 }

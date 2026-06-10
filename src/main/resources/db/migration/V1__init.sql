@@ -3,7 +3,8 @@ CREATE TABLE client (
     nom VARCHAR(255) NOT NULL,
     telephone VARCHAR(255) NOT NULL,
     ville VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE chauffeurs (

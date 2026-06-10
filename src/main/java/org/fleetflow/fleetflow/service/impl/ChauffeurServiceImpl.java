@@ -6,6 +6,8 @@ import org.fleetflow.fleetflow.entity.Chauffeur;
 import org.fleetflow.fleetflow.mapper.ChauffeurMapper;
 import org.fleetflow.fleetflow.repository.ChauffeurRepository;
 import org.fleetflow.fleetflow.service.ChauffeurService;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,7 @@ public class ChauffeurServiceImpl implements ChauffeurService {
     }
 
     @Override
+    @CacheEvict(value = "chauffeurs", key = "#id")
     public ChauffeurDTO modifierChauffeur(Long id, ChauffeurDTO dto) {
         Chauffeur dejaExists = chauffeurRepository.findById(id).orElseThrow(
                 ()-> new RuntimeException("Chauffeur non trouve : " + id)

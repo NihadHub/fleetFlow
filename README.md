@@ -1,10 +1,10 @@
-# 🚚 FleetFlow API
+#  FleetFlow API
 
 A RESTful API for managing and optimizing delivery operations including clients, vehicles, drivers, and shipments with full lifecycle tracking, security, and CI/CD automation.
 
 ---
 
-## 📌 Project Overview
+##  Project Overview
 
 FleetFlow is a backend system designed for a logistics company to manage deliveries efficiently.  
 It allows the creation and assignment of deliveries, tracking their status, and managing all related resources (clients, vehicles, drivers, users).
@@ -20,7 +20,7 @@ The system evolves across multiple phases:
 
 ---
 
-## ⚙️ Tech Stack
+##  Tech Stack
 
 - Java 17 / 21
 - Spring Boot
@@ -37,30 +37,30 @@ The system evolves across multiple phases:
 
 ---
 
-## 🧩 Main Entities
+##  Main Entities
 
-### 👤 Client
+###  Client
 - id
 - name
 - email
 - city
 - phone
 
-### 🚛 Vehicle
+###  Vehicle
 - id
 - plate number (unique)
 - type (Truck, Van, etc.)
 - capacity
 - status (AVAILABLE, IN_DELIVERY, MAINTENANCE)
 
-### 👨‍✈️ Driver
+###  Driver
 - id
 - name
 - phone
 - license type
 - availability
 
-### 📦 Delivery
+###  Delivery
 - id
 - deliveryDate
 - originAddress
@@ -70,7 +70,7 @@ The system evolves across multiple phases:
 - assigned vehicle
 - client
 
-### 🔐 User
+###  User
 - id
 - username
 - email
@@ -79,25 +79,25 @@ The system evolves across multiple phases:
 
 ---
 
-## 🚀 Features
+##  Features
 
-### 👥 Client Management
+###  Client Management
 - Create / Update / Delete / List clients
 
-### 🚛 Vehicle Management
+###  Vehicle Management
 - Create / Update / Delete vehicles
 - Filter available vehicles
 - Derived queries:
     - `findByStatus()`
     - `findByCapacityGreaterThan()`
 
-### 👨‍✈️ Driver Management
+###  Driver Management
 - CRUD drivers
 - List available drivers
 - Derived query:
     - `findByAvailableTrue()`
 
-### 📦 Delivery Management
+###  Delivery Management
 - Create delivery
 - Assign driver + vehicle
 - Update status
@@ -109,7 +109,7 @@ The system evolves across multiple phases:
 
 ---
 
-## 🔐 Security (JWT + Roles)
+##  Security (JWT + Roles)
 
 ### Roles
 - **ADMIN** → full access
@@ -124,7 +124,7 @@ The system evolves across multiple phases:
 
 ---
 
-## 📄 DTO + Validation
+##  DTO + Validation
 
 Entities are NOT exposed directly.
 
